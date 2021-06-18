@@ -1,0 +1,48 @@
+PUT /sites
+{
+"settings":{
+    "analysis":{
+      "filter":{
+        "delimiter":{
+          "type": "word_delimiter",
+          "preserve_original": true
+        },
+        "jmorphy2_russian":{
+          "type": "jmorphy2_stemmer",
+          "name": "ru"
+        }
+      },
+      "analyzer":{
+        "text_ru":{
+          "tokenizer": "standard",
+          "filter":[
+          "delimiter",
+          "lowercase",
+          "jmorphy2_russian"
+          ]
+        }
+      }
+    }
+},
+    "mappings": {
+        "properties": {
+            "title": {
+                "type": "text",
+                "analyzer": "text_ru"
+            },
+            "url": {
+                "type": "text"
+            },
+            "dateTime": {
+                "type": "text"
+            },
+            "author": {
+                "type": "keyword"
+            },
+            "text": {
+                "type": "text",
+                "analyzer": "text_ru"
+            }
+        }
+    }
+}
